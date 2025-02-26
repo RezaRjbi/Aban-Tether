@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('currencies', '0001_initial'),
+        ("currencies", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='currency',
-            name='name',
+            model_name="currency",
+            name="name",
             field=models.CharField(max_length=100, unique=True),
         ),
         migrations.AddIndex(
-            model_name='currency',
-            index=models.Index(fields=['name'], name='currencies__name_5cc800_idx'),
+            model_name="currency",
+            index=models.Index(fields=["name"], name="currencies__name_5cc800_idx"),
         ),
     ]
