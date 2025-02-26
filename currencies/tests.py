@@ -5,6 +5,7 @@ from .models import Currency
 
 User = get_user_model()
 
+
 class CurrencyAPITestCase(APITestCase):
     def setUp(self):
         self.superuser = User.objects.create_user(mobile=User.ME)
@@ -29,7 +30,12 @@ class CurrencyAPITestCase(APITestCase):
         print(self.superuser.is_superuser)
         response = self.client.post(
             self.currency_list_url,
-            {"name": "tether", "display_name": "Tether", "symbol": "₮", "is_active": True},
+            {
+                "name": "tether",
+                "display_name": "Tether",
+                "symbol": "₮",
+                "is_active": True,
+            },
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(Currency.objects.filter(name="tether").exists())
@@ -38,7 +44,12 @@ class CurrencyAPITestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
         response = self.client.post(
             self.currency_list_url,
-            {"name": "tether", "display_name": "Tether", "symbol": "₮", "is_active": True},
+            {
+                "name": "tether",
+                "display_name": "Tether",
+                "symbol": "₮",
+                "is_active": True,
+            },
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
