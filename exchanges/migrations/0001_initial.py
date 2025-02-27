@@ -6,25 +6,55 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('currencies', '0002_alter_currency_name_and_more'),
+        ("currencies", "0002_alter_currency_name_and_more"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Exchange',
+            name="Exchange",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fee', models.DecimalField(decimal_places=2, max_digits=8)),
-                ('quantity', models.DecimalField(decimal_places=4, max_digits=10)),
-                ('type', models.CharField(choices=[('B', 'buy'), ('S', 'sell')], max_length=1)),
-                ('state', models.CharField(choices=[('D', 'done'), ('P', 'pending'), ('C', 'cancelled')], max_length=1)),
-                ('currency', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='currencies.currency')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("fee", models.DecimalField(decimal_places=2, max_digits=8)),
+                ("quantity", models.DecimalField(decimal_places=4, max_digits=10)),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[("B", "buy"), ("S", "sell")], max_length=1
+                    ),
+                ),
+                (
+                    "state",
+                    models.CharField(
+                        choices=[("D", "done"), ("P", "pending"), ("C", "cancelled")],
+                        max_length=1,
+                    ),
+                ),
+                (
+                    "currency",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        to="currencies.currency",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

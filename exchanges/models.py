@@ -20,3 +20,5 @@ class Exchange(models.Model):
     quantity = models.DecimalField(max_digits=10, decimal_places=4)
     type = models.CharField(max_length=1, choices=Type)
     state = models.CharField(max_length=1, choices=State)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
