@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "currencies.apps.CurrenciesConfig",
     "transactions.apps.TransactionsConfig",
+    "exchanges.apps.ExchangesConfig",
 ]
 
 MIDDLEWARE = [
