@@ -13,7 +13,7 @@ from transactions.models import Balance
 from .models import Exchange
 from .permissions import IsUpdateAllowed
 from .serializers import (
-    ExchangeSerializer,
+    ExchangeListSerializer,
     ExchangeUpdateSerializer,
     ExchangeBuySerializer,
 )
@@ -21,7 +21,7 @@ from .utils import get_currency_fee, ExchangeManager
 
 
 class ExchangeList(generics.ListAPIView):
-    serializer_class = ExchangeSerializer
+    serializer_class = ExchangeListSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
@@ -68,4 +68,4 @@ class ExchangeBuyView(views.APIView):
             )
             exchange_manager = ExchangeManager(currency.id, currency.name)
             transaction.on_commit(exchange_manager)
-            return Response(ExchangeSerializer(instance=exchange).data, status=201)
+            return Response(ExchangeListSerializer(instance=exchange).data, status=201)
