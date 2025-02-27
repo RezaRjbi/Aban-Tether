@@ -27,7 +27,6 @@ class CurrencyAPITestCase(APITestCase):
 
     def test_create_currency_as_superuser(self):
         self.client.force_authenticate(user=self.superuser)
-        print(self.superuser.is_superuser)
         response = self.client.post(
             self.currency_list_url,
             {

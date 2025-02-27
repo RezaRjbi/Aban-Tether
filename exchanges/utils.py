@@ -1,4 +1,3 @@
-import time
 from dataclasses import dataclass
 
 from decimal import Decimal
@@ -60,7 +59,6 @@ class ExchangeManager:
 
     @staticmethod
     def buy_from_exchange(currency: str, quantity: Decimal) -> bool:
-        time.sleep(1)
         print(f"{quantity} {currency} has been bought")
         return True
 

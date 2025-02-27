@@ -22,3 +22,6 @@ class Exchange(models.Model):
     state = models.CharField(max_length=1, choices=State, default=State.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.quantity} (at {self.fee}) {self.currency} with `{self.state}` stata and `{self.id}` id "
