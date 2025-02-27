@@ -86,4 +86,4 @@ The API is built using Django REST Framework. Key endpoints include:
   - `PUT/PATCH /exchange/{id}/` – Update an exchange order.
   - `DELETE /exchange/{id}/` – Delete an exchange order.
 
-For more detailed API usage, please refer to the Postman collection file (`AbanTether.postman_collection.json`).
+For more detailed API usage, please refer to the Postman collection file (`ABN.postman_collection.json`).
