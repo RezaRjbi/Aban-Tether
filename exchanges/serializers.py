@@ -8,14 +8,15 @@ from .models import Exchange
 class ExchangeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exchange
-        exclude = ["id", "user"]
+        exclude = ["user"]
 
 
-class ExchangeUpdateSerializer(serializers.ModelSerializer):
+class ExchangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exchange
-        exclude = ["id", "user"]
+        exclude = ["user"]
         read_only_fields = [
+            "id",
             "currency",
             "fee",
             "quantity",
@@ -30,3 +31,12 @@ class ExchangeBuySerializer(serializers.Serializer):
     quantity = serializers.DecimalField(
         max_digits=10, decimal_places=4, min_value=Decimal()
     )
+
+
+class ExchangeSellSerializer(serializers.ModelSerializer):
+    currency = serializers.CharField()
+
+    class Meta:
+        model = Exchange
+        exclude = ["user"]
+        read_only_fields = ["fee", "type"]

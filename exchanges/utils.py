@@ -5,7 +5,7 @@ from decimal import Decimal
 from typing import ClassVar
 
 from django.db import transaction
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Sum
 
 from .models import Exchange
 
@@ -63,3 +63,12 @@ class ExchangeManager:
         time.sleep(1)
         print(f"{quantity} {currency} has been bought")
         return True
+
+    @staticmethod
+    def calculate_total_asset(currency_id: str, user_id: int) -> Decimal:
+        return Exchange.objects.filter(
+            currency_id=currency_id,
+            user_id=user_id,
+            state=Exchange.State.DONE,
+            type=Exchange.Type.BUY,
+        ).aggregate(total=Sum("quantity", default=0))["total"]

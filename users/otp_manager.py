@@ -1,6 +1,6 @@
 from django.core.cache import cache
 import time
-from typing import Optional, Final
+from typing import Final
 
 
 class OTP:

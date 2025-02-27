@@ -6,8 +6,6 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
-from typing import ClassVar
-
 
 class UserManager(BaseUserManager):
     def create_user(self, mobile, password=None, *args, **kwargs):
