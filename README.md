@@ -13,7 +13,7 @@ This project demonstrates various aspect of a  RESTful APIs using Django and Dja
 ## Features
 
 - **User Management:** Secure user authentication and authorization.
-- **Exchange Operations:** Endpoints for listing, buying, selling, and managing exchange orders.
+- **Exchange Operations:** Endpoints for listing, buying, and managing exchange orders.
 - **Transaction Processing:** Ensures atomicity when updating user balances and registering exchanges.
 - **Testing:** API tests covering successful operations, error conditions, and edge cases.
 
