@@ -47,7 +47,6 @@ class ExchangeAPITestCase(APITestCase):
         response = self.client.post(self.exchange_buy_url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-
     def test_exchange_buy_invalid_currency(self):
         data = {"currency": "INVALID", "quantity": 1}
         response = self.client.post(self.exchange_buy_url, data)
