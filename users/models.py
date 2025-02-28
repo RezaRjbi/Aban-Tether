@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     ME = "9378510273"
 
     mobile = models.CharField(
-        max_length=10, unique=True, db_index=True, validators=[mobile_regex_validator]
+        max_length=10, unique=True, validators=[mobile_regex_validator]
     )
 
     USERNAME_FIELD = "mobile"
@@ -47,3 +47,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label) -> bool:
         return self.is_superuser
+
+    class Meta:
+        indexes = [models.Index(fields=["mobile"])]

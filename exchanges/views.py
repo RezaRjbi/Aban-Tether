@@ -15,7 +15,6 @@ from .serializers import (
     ExchangeListSerializer,
     ExchangeSerializer,
     ExchangeBuySerializer,
-    ExchangeSellSerializer,
 )
 from .utils import get_currency_fee, ExchangeManager
 
@@ -66,29 +65,3 @@ class ExchangeBuyView(views.APIView):
             exchange_manager = ExchangeManager(currency.id, currency.name)
             transaction.on_commit(exchange_manager)
             return Response(ExchangeListSerializer(instance=exchange).data, status=201)
-
-
-class ExchangeSellView(generics.CreateAPIView):
-    serializer_class = ExchangeSellSerializer
-    permissions = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer: ExchangeSerializer) -> None:
-        currency = Currency.objects.get_active_by_name(
-            serializer.validated_data["currency"], "id", "name"
-        )
-        if not currency:
-            raise Http404("Currency does not exist")
-        total_user_asset = ExchangeManager.calculate_total_asset(
-            currency.id, self.request.user.id
-        )
-        currency_fee = get_currency_fee(currency.name)
-        if total_user_asset < serializer.validated_data["quantity"]:
-            raise BadRequestException(f"Insufficient {currency.name} balance")
-        serializer.save(
-            currency=currency,
-            user=self.request.user,
-            quantity=serializer.validated_data["quantity"],
-            type=Exchange.Type.SELL,
-            fee=currency_fee,
-            state=Exchange.State.DONE,
-        )
